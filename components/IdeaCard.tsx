@@ -11,7 +11,7 @@ interface IdeaCardProps {
 }
 
 export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardProps) {
-  const [copyState, setCopyState] = useState<"buildSpec" | "sharePost" | null>(null);
+  const [copyState, setCopyState] = useState<"buildSpec" | "sharePost" | "link" | null>(null);
 
   const buildSpec = `Title: ${idea.title}\n\n${idea.oneLiner}\n\nScope:\n${idea.scope.map((s) => `• ${s}`).join("\n")}\n\nShip Criteria:\n${idea.shipCriteria.map((c) => `• ${c}`).join("\n")}`;
 
@@ -21,24 +21,41 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
     ? `${window.location.origin}/idea/${idea.id}`
     : "";
 
-  const handleCopy = async (text: string, type: "buildSpec" | "sharePost") => {
+  const handleCopy = async (text: string, type: "buildSpec" | "sharePost" | "link") => {
     try {
-      await navigator.clipboard.writeText(text);
+      // Use modern clipboard API if available
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand("copy");
+        } catch (err) {
+          console.error("Fallback copy failed:", err);
+        }
+        document.body.removeChild(textArea);
+      }
+      
       setCopyState(type);
       onCopy(idea.id);
       setTimeout(() => setCopyState(null), 1200);
     } catch (err) {
       console.error("Failed to copy:", err);
+      // Show error feedback
+      alert("Failed to copy to clipboard. Please try again.");
     }
   };
 
   const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(permalink);
-      onCopy(idea.id);
-    } catch (err) {
-      console.error("Failed to copy link:", err);
-    }
+    await handleCopy(permalink, "link");
   };
 
   return (
@@ -142,10 +159,10 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
         >
           {copyState === "buildSpec" && copied ? (
             <>
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: "#22C55E" }}>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: "#0B0E14" }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
-              <span style={{ color: "#22C55E" }}>Copied ✓</span>
+              <span style={{ color: "#0B0E14", fontWeight: "600" }}>Copied ✓</span>
             </>
           ) : (
             <>
@@ -200,18 +217,33 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
             "--tw-ring-color": "#FACC15"
           } as React.CSSProperties & { "--tw-ring-color": string }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#111827";
-            e.currentTarget.style.color = "#E5E7EB";
+            if (copyState !== "link" || !copied) {
+              e.currentTarget.style.background = "#111827";
+              e.currentTarget.style.color = "#E5E7EB";
+            }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "#9CA3AF";
+            if (copyState !== "link" || !copied) {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "#9CA3AF";
+            }
           }}
         >
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-          </svg>
-          Copy Link
+          {copyState === "link" && copied ? (
+            <>
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: "#22C55E" }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span style={{ color: "#22C55E" }}>Copied ✓</span>
+            </>
+          ) : (
+            <>
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              Copy Link
+            </>
+          )}
         </button>
       </div>
     </div>
