@@ -18,12 +18,19 @@ export default function IdeaPageClient({ idea }: IdeaPageClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <div className="min-h-screen" style={{ background: "#0B0E14" }}>
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
+            style={{ color: "#9CA3AF" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#E5E7EB";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "#9CA3AF";
+            }}
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

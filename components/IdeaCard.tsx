@@ -42,14 +42,29 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
   };
 
   return (
-    <div className="group relative rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md">
+    <div className="group relative rounded-2xl border p-6 transition-all" style={{ 
+      borderColor: "#1F2937", 
+      background: "#111827" 
+    }}>
       {/* Header */}
       <div className="mb-4">
         <div className="mb-2 flex items-start justify-between gap-2">
-          <h3 className="text-xl font-bold text-gray-900">{idea.title}</h3>
+          <h3 className="text-xl font-bold" style={{ color: "#E5E7EB" }}>{idea.title}</h3>
           <button
             onClick={onShuffle}
-            className="flex-shrink-0 rounded-md p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-shrink-0 rounded-md p-1.5 transition-colors focus:outline-none focus:ring-2"
+            style={{ 
+              color: "#6B7280",
+              "--tw-ring-color": "#FACC15"
+            } as React.CSSProperties & { "--tw-ring-color": string }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#9CA3AF";
+              e.currentTarget.style.background = "#1F2937";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "#6B7280";
+              e.currentTarget.style.background = "transparent";
+            }}
             title="Shuffle this idea"
             aria-label="Shuffle this idea"
           >
@@ -58,12 +73,18 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
             </svg>
           </button>
         </div>
-        <p className="text-sm text-gray-600">{idea.oneLiner}</p>
+        <p className="text-sm" style={{ color: "#9CA3AF" }}>{idea.oneLiner}</p>
         <div className="mt-2 flex gap-2">
-          <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700">
+          <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ 
+            background: "#0B0E14", 
+            color: "#FACC15" 
+          }}>
             {idea.time}
           </span>
-          <span className="inline-flex items-center rounded-full bg-purple-50 px-2.5 py-0.5 text-xs font-medium text-purple-700">
+          <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ 
+            background: "#0B0E14", 
+            color: "#FACC15" 
+          }}>
             {idea.skill}
           </span>
         </div>
@@ -72,11 +93,13 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
       {/* Body */}
       <div className="mb-6 space-y-4">
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-900">Scope</h4>
-          <ul className="space-y-1 text-sm text-gray-700">
+          <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#6B7280" }}>
+            Scope
+          </h4>
+          <ul className="space-y-1 text-sm" style={{ color: "#E5E7EB" }}>
             {idea.scope.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400" />
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#6B7280" }} />
                 <span>{item}</span>
               </li>
             ))}
@@ -84,11 +107,13 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
         </div>
 
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-900">Ship Criteria</h4>
-          <ul className="space-y-1 text-sm text-gray-700">
+          <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#6B7280" }}>
+            Ship Criteria
+          </h4>
+          <ul className="space-y-1 text-sm" style={{ color: "#E5E7EB" }}>
             {idea.shipCriteria.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400" />
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#6B7280" }} />
                 <span>
                   <strong>Done when:</strong> {item.replace(/^Done when: /i, "")}
                 </span>
@@ -99,17 +124,28 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col gap-2 border-t border-gray-100 pt-4">
+      <div className="flex flex-col gap-2.5 border-t pt-5" style={{ borderColor: "#1F2937" }}>
         <button
           onClick={() => handleCopy(buildSpec, "buildSpec")}
-          className="flex items-center justify-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+          className="flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all hover:scale-[1.02] focus:outline-none focus:ring-2"
+          style={{
+            background: "#FACC15",
+            color: "#0B0E14",
+            "--tw-ring-color": "#FACC15"
+          } as React.CSSProperties & { "--tw-ring-color": string }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#EAB308";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "#FACC15";
+          }}
         >
           {copyState === "buildSpec" && copied ? (
             <>
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: "#22C55E" }}>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Copied ✓
+              <span style={{ color: "#22C55E" }}>Copied ✓</span>
             </>
           ) : (
             <>
@@ -123,14 +159,26 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
 
         <button
           onClick={() => handleCopy(sharePost, "sharePost")}
-          className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-all focus:outline-none focus:ring-2"
+          style={{
+            borderColor: "#1F2937",
+            background: "transparent",
+            color: "#E5E7EB",
+            "--tw-ring-color": "#FACC15"
+          } as React.CSSProperties & { "--tw-ring-color": string }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#111827";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+          }}
         >
           {copyState === "sharePost" && copied ? (
             <>
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: "#22C55E" }}>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Copied ✓
+              <span style={{ color: "#22C55E" }}>Copied ✓</span>
             </>
           ) : (
             <>
@@ -144,7 +192,21 @@ export default function IdeaCard({ idea, onShuffle, onCopy, copied }: IdeaCardPr
 
         <button
           onClick={handleCopyLink}
-          className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-xs font-semibold transition-all focus:outline-none focus:ring-2"
+          style={{
+            borderColor: "#1F2937",
+            background: "transparent",
+            color: "#9CA3AF",
+            "--tw-ring-color": "#FACC15"
+          } as React.CSSProperties & { "--tw-ring-color": string }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#111827";
+            e.currentTarget.style.color = "#E5E7EB";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#9CA3AF";
+          }}
         >
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />

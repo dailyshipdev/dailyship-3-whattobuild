@@ -1,0 +1,129 @@
+1) Base colors (90% of UI)
+
+These reduce cognitive load and keep focus on content.
+
+Background:        #0B0E14  (very dark blue/charcoal)
+Surface / Cards:   #111827  (slate-900)
+Border / Divider:  #1F2937  (slate-800)
+
+
+Why:
+
+Dark ≠ edgy here, it’s calm + focused
+
+Cards feel like “workspaces”, not marketing
+
+2) Primary accent (⚡ shipping energy)
+
+Electric Amber / Yellow
+
+Primary Accent:    #FACC15  (amber-400)
+Hover Accent:      #EAB308  (amber-500)
+
+
+Use this for:
+
+⚡ CTA button (“Generate 3 Ideas Now”)
+
+Icons (⚡, ⏱️)
+
+Small highlights (counts: “20 seconds”, “60+ ideas”)
+
+Why this works:
+
+Yellow = speed, action, urgency
+
+Strong contrast on dark
+
+Feels productive, not playful (unlike neon green)
+
+3) Secondary accent (quiet success state)
+
+Soft Green (only for “done / copied”)
+
+Success:           #22C55E  (green-500)
+
+
+Use sparingly:
+
+“Copied ✓”
+
+Optional “Ready to ship” badge
+
+Never use green for primary CTAs — it dilutes urgency.
+
+4) Text colors (hierarchy is critical)
+Primary text:      #E5E7EB  (gray-200)
+Secondary text:    #9CA3AF  (gray-400)
+Muted text:        #6B7280  (gray-500)
+
+
+Rules:
+
+Headlines: primary text
+
+Descriptions: secondary
+
+Labels / hints / tags: muted
+
+This keeps the UI quiet and scannable.
+
+Button styling (important)
+Primary CTA
+Background:   #FACC15
+Text:         #0B0E14
+Hover:        #EAB308
+Radius:       rounded-xl
+
+
+This button should visually scream:
+
+“Click me. Something happens instantly.”
+
+Secondary buttons (Regenerate, Copy)
+Background:   transparent
+Border:       #1F2937
+Text:         #E5E7EB
+Hover:        background #111827
+
+Card styling (this matters a lot)
+
+Cards should feel like tasks, not blog posts.
+
+Background:   #111827
+Border:       1px solid #1F2937
+Radius:       rounded-2xl
+Shadow:       very subtle (not floaty)
+
+
+Accent usage inside cards:
+
+Tags (30m, frontend) → amber text on dark pill
+
+Section headers (“Scope”, “Ship Criteria”) → muted gray, uppercase, small
+
+Never color bullets — let content breathe
+
+Gradient? Yes — but ultra-subtle
+
+Only one place:
+
+Hero background (optional)
+background: radial-gradient(
+  circle at top,
+  rgba(250,204,21,0.08),
+  transparent 60%
+);
+
+
+This gives a hint of energy without looking like SaaS marketing.
+
+What NOT to do (important)
+
+❌ Neon green primary
+❌ Purple / blue gradients
+❌ More than one accent color
+❌ Light mode first
+❌ “Playful” illustrations
+
+This is not a startup pitch deck — it’s a tool.

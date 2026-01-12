@@ -100,104 +100,206 @@ function HomeContent() {
   const canGenerate = time && skill;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      {/* Hero Section */}
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+    <div className="min-h-screen" style={{ background: "#0B0E14", position: "relative" }}>
+      {/* Ultra-subtle radial gradient in hero only */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(circle at top, rgba(250,204,21,0.08), transparent 60%)"
+      }} />
+      
+      {/* Hero Section - Maximum Impact */}
+      <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-32">
         <div className="text-center">
-          <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            What should I build today?
+          {/* The Hitting Sentence - First 5 seconds hook */}
+          <div className="mb-8 inline-block animate-fade-in-up rounded-full border px-4 py-1.5 text-sm font-medium backdrop-blur-sm" style={{ borderColor: "#1F2937", background: "#111827", color: "#FACC15" }}>
+            <span className="mr-2">⚡</span>
+            No signup • No BS • Just ideas
+          </div>
+          
+          <h1 className="mx-auto max-w-4xl animate-fade-in-up text-6xl font-extrabold tracking-tight sm:text-7xl md:text-8xl" style={{ color: "#E5E7EB", animationDelay: "0.1s" }}>
+            <span className="block">Stop staring at</span>
+            <span className="block" style={{ color: "#FACC15" }}>
+              a blank screen.
+            </span>
           </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Pick your time + skill → get 3 shippable ideas.
+          
+          <p className="mx-auto mt-8 max-w-2xl text-2xl font-medium leading-relaxed sm:text-3xl" style={{ color: "#9CA3AF" }}>
+            Get <span className="font-bold" style={{ color: "#E5E7EB" }}>3 shippable ideas</span> in{" "}
+            <span className="font-bold" style={{ color: "#FACC15" }}>20 seconds</span>. Pick your time + skill → start building.
           </p>
-        </div>
 
-        {/* Controls */}
-        <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:justify-center sm:gap-8">
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Time</label>
-            <select
-              value={time}
-              onChange={(e) => {
-                const newTime = e.target.value as TimeOption | "";
-                setTime(newTime);
-                updateURL(newTime, skill);
-              }}
-              className="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-colors hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select time</option>
-              {TIME_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Skill</label>
-            <select
-              value={skill}
-              onChange={(e) => {
-                const newSkill = e.target.value as SkillOption | "";
-                setSkill(newSkill);
-                updateURL(time, newSkill);
-              }}
-              className="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition-colors hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select skill</option>
-              {SKILL_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option.charAt(0).toUpperCase() + option.slice(1)}
-                </option>
-              ))}
-            </select>
+          {/* Social Proof / Stats */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm" style={{ color: "#6B7280" }}>
+            <div className="flex items-center gap-2">
+              <span style={{ color: "#FACC15" }}>⚡</span>
+              <span className="font-semibold" style={{ color: "#9CA3AF" }}>60+ ideas</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span style={{ color: "#FACC15" }}>⏱️</span>
+              <span className="font-semibold" style={{ color: "#9CA3AF" }}>20 seconds</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span style={{ color: "#FACC15" }}>✓</span>
+              <span className="font-semibold" style={{ color: "#9CA3AF" }}>Ready to ship</span>
+            </div>
           </div>
         </div>
 
-        {/* Generate Button */}
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={handleGenerate}
-            disabled={!canGenerate}
-            className="rounded-lg bg-gray-900 px-8 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-900"
-          >
-            Generate 3 ideas
-          </button>
+        {/* Controls - More Prominent */}
+        <div className="mx-auto mt-16 max-w-2xl">
+          <div className="rounded-2xl border p-8 sm:p-10" style={{ borderColor: "#1F2937", background: "#111827" }}>
+            <div className="flex flex-col gap-6 sm:flex-row sm:gap-4">
+              <div className="flex-1">
+                <label className="mb-3 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#6B7280" }}>
+                  ⏱️ How much time?
+                </label>
+                <select
+                  value={time}
+                  onChange={(e) => {
+                    const newTime = e.target.value as TimeOption | "";
+                    setTime(newTime);
+                    updateURL(newTime, skill);
+                  }}
+                  className="w-full rounded-xl border px-5 py-3.5 text-base font-semibold transition-all focus:outline-none focus:ring-2"
+                  style={{
+                    borderColor: "#1F2937",
+                    background: "#0B0E14",
+                    color: "#E5E7EB",
+                    "--tw-ring-color": "#FACC15"
+                  } as React.CSSProperties & { "--tw-ring-color": string }}
+                >
+                  <option value="" style={{ background: "#0B0E14", color: "#6B7280" }}>Select time</option>
+                  {TIME_OPTIONS.map((option) => (
+                    <option key={option} value={option} style={{ background: "#0B0E14", color: "#E5E7EB" }}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex-1">
+                <label className="mb-3 block text-xs font-semibold uppercase tracking-wider" style={{ color: "#6B7280" }}>
+                  💻 What's your skill?
+                </label>
+                <select
+                  value={skill}
+                  onChange={(e) => {
+                    const newSkill = e.target.value as SkillOption | "";
+                    setSkill(newSkill);
+                    updateURL(time, newSkill);
+                  }}
+                  className="w-full rounded-xl border px-5 py-3.5 text-base font-semibold transition-all focus:outline-none focus:ring-2"
+                  style={{
+                    borderColor: "#1F2937",
+                    background: "#0B0E14",
+                    color: "#E5E7EB",
+                    "--tw-ring-color": "#FACC15"
+                  } as React.CSSProperties & { "--tw-ring-color": string }}
+                >
+                  <option value="" style={{ background: "#0B0E14", color: "#6B7280" }}>Select skill</option>
+                  {SKILL_OPTIONS.map((option) => (
+                    <option key={option} value={option} style={{ background: "#0B0E14", color: "#E5E7EB" }}>
+                      {option.charAt(0).toUpperCase() + option.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Generate Button - Primary CTA with Amber */}
+            <div className="mt-8">
+              <button
+                onClick={handleGenerate}
+                disabled={!canGenerate}
+                className="w-full rounded-xl px-8 py-4 text-lg font-bold transition-all hover:scale-[1.02] focus:outline-none focus:ring-4 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
+                style={{
+                  background: canGenerate ? "#FACC15" : "#1F2937",
+                  color: canGenerate ? "#0B0E14" : "#6B7280",
+                  "--tw-ring-color": "#FACC15"
+                } as React.CSSProperties & { "--tw-ring-color": string }}
+                onMouseEnter={(e) => {
+                  if (canGenerate) {
+                    e.currentTarget.style.background = "#EAB308";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (canGenerate) {
+                    e.currentTarget.style.background = "#FACC15";
+                  }
+                }}
+              >
+                {canGenerate ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Generate 3 Ideas Now
+                  </span>
+                ) : (
+                  "Select time & skill to get started"
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Results Section */}
       {ideas.length > 0 && (
-        <div ref={resultsRef} className="mx-auto max-w-7xl px-4 pb-16 sm:px-6">
+        <div ref={resultsRef} className="relative mx-auto max-w-7xl px-4 pb-24 sm:px-6">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold sm:text-4xl" style={{ color: "#E5E7EB" }}>
+              Here are your <span style={{ color: "#FACC15" }}>3 ideas</span>
+            </h2>
+            <p className="mt-3 text-lg" style={{ color: "#9CA3AF" }}>
+              Pick one and start building. Or regenerate for more options.
+            </p>
+          </div>
+
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-4">
             <button
               onClick={handleRegenerate}
-              className="rounded-lg border border-gray-300 bg-white px-6 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition-all hover:bg-opacity-100 focus:outline-none focus:ring-2"
+              style={{
+                borderColor: "#1F2937",
+                background: "transparent",
+                color: "#E5E7EB",
+                "--tw-ring-color": "#FACC15"
+              } as React.CSSProperties & { "--tw-ring-color": string }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#111827";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
             >
-              Regenerate
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Regenerate All
             </button>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {ideas.map((idea, index) => (
-              <IdeaCard
-                key={idea.id}
-                idea={idea}
-                onShuffle={() => handleShuffleOne(index)}
-                onCopy={handleCopyFeedback}
-                copied={copiedId === idea.id}
-              />
+              <div key={idea.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <IdeaCard
+                  idea={idea}
+                  onShuffle={() => handleShuffleOne(index)}
+                  onCopy={handleCopyFeedback}
+                  copied={copiedId === idea.id}
+                />
+              </div>
             ))}
           </div>
 
           {ideas.length < 3 && (
-            <div className="mt-8 text-center text-sm text-gray-600">
-              <p>
+            <div className="mt-12 rounded-xl border p-6 text-center" style={{ borderColor: "#1F2937", background: "#111827" }}>
+              <p className="text-sm font-medium" style={{ color: "#9CA3AF" }}>
                 Help expand this bucket →{" "}
                 <a
                   href="https://github.com"
-                  className="font-medium text-blue-600 hover:text-blue-700"
+                  className="font-semibold underline"
+                  style={{ color: "#FACC15" }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -217,10 +319,10 @@ function HomeContent() {
 export default function Home() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "#0B0E14" }}>
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-gray-900 border-r-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-r-transparent" style={{ borderColor: "#FACC15", borderRightColor: "transparent" }}></div>
+          <p className="mt-4" style={{ color: "#9CA3AF" }}>Loading...</p>
         </div>
       </div>
     }>
