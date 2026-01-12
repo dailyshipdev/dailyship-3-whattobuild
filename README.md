@@ -36,10 +36,10 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/dailyshipdev/dailyship-2-whattobuild.git
+git clone https://github.com/dailyshipdev/dailyship-3-whattobuild.git
 
 # Navigate to the project
-cd dailyship-2-whattobuild
+cd dailyship-3-whattobuild
 
 # Install dependencies
 npm install
@@ -60,7 +60,7 @@ npm start
 ## 📁 Project Structure
 
 ```
-dailyship-2-whattobuild/
+dailyship-3-whattobuild/
 ├── app/
 │   ├── page.tsx              # Main generator page
 │   ├── layout.tsx            # Root layout with metadata
@@ -119,7 +119,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Built by [@dailyshipdev](https://github.com/dailyshipdev) - Shipping daily until one app hits $25M+
 
-- 🐙 [GitHub](https://github.com/dailyshipdev)
+- 🐙 [GitHub](https://github.com/dailyshipdev/dailyship-3-whattobuild)
 - 🐦 [X (Twitter)](https://x.com/dailyshipdev)
 - 💼 [LinkedIn](https://www.linkedin.com/in/dailyship/)
 - 🔵 [Bluesky](https://bsky.app/profile/dailyship.bsky.social)
